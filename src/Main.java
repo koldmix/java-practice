@@ -4,5 +4,8 @@ public class Main {
         System.out.println("Пробую amend");
 
         System.out.println("Это НОВАЯ строчка из main, которая создаст конфликт");
+
+        System.out.println("Добавил новую веткуq");
+
     }
 }
