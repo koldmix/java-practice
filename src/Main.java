@@ -3,7 +3,7 @@ public class Main {
         System.out.println("Вассап мабой");
         System.out.println("Пробую amend");
 
-        System.out.println("Добавил новую ветку");
+        System.out.println("Добавил новую веткуq");
 
     }
 }
