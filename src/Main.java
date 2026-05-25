@@ -5,9 +5,9 @@ public class Main {
     public static void main(String[] args) {
 
         int userInpMenu;
-        int countTasks = 1;
-        String[] arrTasks = new String[countTasks];
         String[] afterAdd = {};
+        String[] arrTasks = new String[100];
+        int countTasks = 1;
 
         do {
             showMenu();
@@ -16,9 +16,8 @@ public class Main {
             if (userInpMenu != 0) {
                 switch (userInpMenu) {
                     case 1 -> {
-                        addTask(arrTasks);
+                        afterAdd = addTask(arrTasks, countTasks);
                         countTasks++;
-                        afterAdd = new String[]{Arrays.toString(arrTasks)};
                     }
                     case 2 -> showTasks(afterAdd);
                 }
@@ -26,16 +25,15 @@ public class Main {
         } while (userInpMenu != 0);
     }
 
-    public static String[] addTask(String[] arr) {
+    public static String[] addTask(String[] arr, int realCountTasks) {
         System.out.println("Введите описание задачи: ");
         Scanner userInTask = new Scanner(System.in);
         String userTask = userInTask.nextLine();
 
-        String[] addTask = new String[arr.length];
-        addTask[arr.length - 1] = userTask;
+        arr[realCountTasks] = userTask;
 
         System.out.println("Задача добавлена!" + "\n");
-        return addTask;
+        return arr;
     }
 
     public static void showTasks(String[] strTasks) {
@@ -43,11 +41,17 @@ public class Main {
         if (strTasks.length == 0) {
             System.out.println("Задач нет" + "\n");
         }
-        for (String arrTask : strTasks) {
-            System.out.println(arrTask + "\n");
+//        for (String arrTask : strTasks) {
+//            if (arrTask != null)
+//            System.out.print("[ ] " + arrTask + "\n");
+//        }
+        for (int i = 0; i < strTasks.length; i++) {
+            if (strTasks[i] != null)
+                System.out.print(i + ". " + "[ ] " + strTasks[i] + "\n");
         }
-//        return strTasks;
+        System.out.println("");
     }
+
 
     public static void showMenu() {
         System.out.println(">>> Меню:\n" +
