@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -7,7 +6,7 @@ public class Main {
         int userInpMenu;
         String[] afterAdd = {};
         String[] arrTasks = new String[100];
-        int countTasks = 1;
+        int countTasks = 0;
 
         do {
             showMenu();
@@ -16,10 +15,12 @@ public class Main {
             if (userInpMenu != 0) {
                 switch (userInpMenu) {
                     case 1 -> {
-                        afterAdd = addTask(arrTasks, countTasks);
+//                        afterAdd = addTask(arrTasks, countTasks);
+                        addTask(arrTasks, countTasks);
                         countTasks++;
                     }
-                    case 2 -> showTasks(afterAdd);
+//                    case 2 -> showTasks(afterAdd, countTasks);
+                    case 2 -> showTasks(arrTasks, countTasks);
                 }
             }
         } while (userInpMenu != 0);
@@ -36,20 +37,17 @@ public class Main {
         return arr;
     }
 
-    public static void showTasks(String[] strTasks) {
+    public static void showTasks(String[] strTasks, int realCountTasks) {
         System.out.println("Список задач:");
-        if (strTasks.length == 0) {
+        if (realCountTasks == 0) {
             System.out.println("Задач нет" + "\n");
+            return;
         }
-//        for (String arrTask : strTasks) {
-//            if (arrTask != null)
-//            System.out.print("[ ] " + arrTask + "\n");
-//        }
-        for (int i = 0; i < strTasks.length; i++) {
-            if (strTasks[i] != null)
-                System.out.print(i + ". " + "[ ] " + strTasks[i] + "\n");
+
+        for (int i = 0; i < realCountTasks; i++) {
+            System.out.print(i + 1 + ". " + "[ ] " + strTasks[i] + "\n");
         }
-        System.out.println("");
+        System.out.println();
     }
 
 
