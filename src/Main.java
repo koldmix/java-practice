@@ -4,7 +4,6 @@ public class Main {
     public static void main(String[] args) {
 
         int userInpMenu;
-        String[] afterAdd = {};
         String[] arrTasks = new String[100];
         int countTasks = 0;
 
@@ -15,18 +14,16 @@ public class Main {
             if (userInpMenu != 0) {
                 switch (userInpMenu) {
                     case 1 -> {
-//                        afterAdd = addTask(arrTasks, countTasks);
                         addTask(arrTasks, countTasks);
                         countTasks++;
                     }
-//                    case 2 -> showTasks(afterAdd, countTasks);
                     case 2 -> showTasks(arrTasks, countTasks);
                 }
             }
         } while (userInpMenu != 0);
     }
 
-    public static String[] addTask(String[] arr, int realCountTasks) {
+    public static void addTask(String[] arr, int realCountTasks) {
         System.out.println("Введите описание задачи: ");
         Scanner userInTask = new Scanner(System.in);
         String userTask = userInTask.nextLine();
@@ -34,11 +31,11 @@ public class Main {
         arr[realCountTasks] = userTask;
 
         System.out.println("Задача добавлена!" + "\n");
-        return arr;
     }
 
     public static void showTasks(String[] strTasks, int realCountTasks) {
         System.out.println("Список задач:");
+
         if (realCountTasks == 0) {
             System.out.println("Задач нет" + "\n");
             return;
@@ -48,6 +45,12 @@ public class Main {
             System.out.print(i + 1 + ". " + "[ ] " + strTasks[i] + "\n");
         }
         System.out.println();
+    }
+
+    public static void deleteTask(String[] arrTasks, int realCountTasks){
+        System.out.println("Введите номер задачи для удаления: ");
+        Scanner userInDelete = new Scanner(System.in);
+        int userDel = userInDelete.nextInt();
     }
 
 
