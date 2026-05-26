@@ -19,6 +19,7 @@ public class Main {
                     }
                     case 2 -> showTasks(arrTasks, countTasks);
                     case 3 -> deleteTask(arrTasks, countTasks);
+                    case 4 -> markAsComplete(arrTasks);
                 }
             }
         } while (userInpMenu != 0);
@@ -29,7 +30,7 @@ public class Main {
         Scanner userInTask = new Scanner(System.in);
         String userTask = userInTask.nextLine();
 
-        arr[realCountTasks] = userTask;
+        arr[realCountTasks] = "[ ]" + userTask;
 
         System.out.println("Задача добавлена!" + "\n");
     }
@@ -44,7 +45,8 @@ public class Main {
 
         for (int i = 0; i < realCountTasks; i++) {
             if (strTasks[i] != null)
-                System.out.print(i + 1 + ". " + "[ ] " + strTasks[i] + "\n");
+//                System.out.print(i + 1 + ". " + "[ ] " + strTasks[i] + "\n");
+                System.out.print(i + 1 + ". " + strTasks[i] + "\n");
         }
         System.out.println();
     }
@@ -53,7 +55,6 @@ public class Main {
         System.out.println("Введите номер задачи для удаления: ");
         Scanner userInDelete = new Scanner(System.in);
         int userDel = userInDelete.nextInt();
-        String task = arrTasks[userDel - 1];
 
         if (arrTasks[userDel - 1] != null){
             for (int i = userDel - 1; i < realCountTasks; i++) {
@@ -63,9 +64,17 @@ public class Main {
             System.out.println("Такой задачи не существует");
         }
 
-        System.out.println("Задача " + "\"" + task + "\"" + " удалена!");
+        System.out.println("Задача " + "\"" + arrTasks[userDel - 1] + "\"" + " удалена!");
     }
 
+    public static void markAsComplete(String[] arrTask){
+        System.out.println("Введите номер задачи для отметки: ");
+        Scanner userMarkCompetition = new Scanner(System.in);
+        int userMark = userMarkCompetition.nextInt();
+
+        arrTask[userMark - 1] = arrTask[userMark - 1].replace("[ ]", "[x]");
+        System.out.println("Задача " + "\"" + arrTask[userMark - 1] + "\"" + " отмечена как выполненная!");
+    }
 
     public static void showMenu() {
         System.out.println(">>> Меню:\n" +
