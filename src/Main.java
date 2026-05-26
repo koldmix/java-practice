@@ -18,6 +18,7 @@ public class Main {
                         countTasks++;
                     }
                     case 2 -> showTasks(arrTasks, countTasks);
+                    case 3 -> deleteTask(arrTasks, countTasks);
                 }
             }
         } while (userInpMenu != 0);
@@ -42,7 +43,8 @@ public class Main {
         }
 
         for (int i = 0; i < realCountTasks; i++) {
-            System.out.print(i + 1 + ". " + "[ ] " + strTasks[i] + "\n");
+            if (strTasks[i] != null)
+                System.out.print(i + 1 + ". " + "[ ] " + strTasks[i] + "\n");
         }
         System.out.println();
     }
@@ -51,6 +53,17 @@ public class Main {
         System.out.println("Введите номер задачи для удаления: ");
         Scanner userInDelete = new Scanner(System.in);
         int userDel = userInDelete.nextInt();
+        String task = arrTasks[userDel - 1];
+
+        if (arrTasks[userDel - 1] != null){
+            for (int i = userDel - 1; i < realCountTasks; i++) {
+                arrTasks[i] = arrTasks[i + 1];
+            }
+        }else {
+            System.out.println("Такой задачи не существует");
+        }
+
+        System.out.println("Задача " + "\"" + task + "\"" + " удалена!");
     }
 
 
