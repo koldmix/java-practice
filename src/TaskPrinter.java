@@ -1,10 +1,10 @@
 
 public final class TaskPrinter {
 
-    private TaskHandlerImpl taskHandler;
+    private TaskHandlerImpl taskHandlerImpl;
 
-    public TaskPrinter(TaskHandlerImpl taskHandler) {
-        this.taskHandler = taskHandler;
+    public TaskPrinter(TaskHandlerImpl taskHandlerImpl) {
+        this.taskHandlerImpl = taskHandlerImpl;
     }
 
     private TaskPrinter() {
@@ -12,7 +12,7 @@ public final class TaskPrinter {
     }
 
     public void showTasks(){
-        System.out.println(taskHandler);
+        System.out.println(taskHandlerImpl.getAllTasks());
     }
 
     public static void showMenu(){

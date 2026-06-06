@@ -1,3 +1,6 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -5,29 +8,49 @@ import java.util.Scanner;
 public class TaskHandlerImpl implements TaskHandler{
 
     private List<Task> taskList = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
-
-//    public TaskHandlerImpl(List<Task> taskList) {
-//        this.taskList = taskList;
-//    }
+    private Scanner scanner = new Scanner(System.in);
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yy");
+    private int countTask = 1;
 
     @Override
-    public boolean addTask() {
+    public void addTask() {
+        boolean dedline = true;
+        boolean priority = true;
         Task task = new Task();
-        System.out.println("Введите приоритет: " +
-                "1 - IMPORTANT" +
-                "2 - NOT_IMPORTANT" +
-                "3 - STANDARD");
-        int uI = Integer.parseInt(scanner.nextLine());
-        switch (uI){
-            case 1 -> task.setPriorityTask(Priority.IMPORTANT);
-            case 2 -> task.setPriorityTask(Priority.NOT_IMPORTANT);
-            case 3 -> task.setPriorityTask(Priority.STANDARD);
-        }
+        do {
+            System.out.println("Введите приоритет: " +
+                    " 1 - IMPORTANT," +
+                    " 2 - NOT_IMPORTANT," +
+                    " 3 - STANDARD.");
+            try {
+                int uI = Integer.parseInt(scanner.nextLine());
+                if (uI < 1 || uI > 3){
+                    System.out.println("Введите число от 1 до 3");
+                }else {
+                    switch (uI){
+                        case 1 -> task.setPriorityTask(Priority.IMPORTANT);
+                        case 2 -> task.setPriorityTask(Priority.NOT_IMPORTANT);
+                        case 3 -> task.setPriorityTask(Priority.STANDARD);
+                    }
+                    priority = false;
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Введите число");
+            }
+        }while (priority);
 
-        System.out.println("Введите дедлайн: ");
-        String deadLine = scanner.nextLine();
-        task.setDeadLineTask(deadLine);
+        do {
+            System.out.println("Введите дедлайн в формате dd.MM.yy: ");
+            String date = scanner.nextLine();
+            try {
+                LocalDate localDate = LocalDate.parse(date, dtf);
+                String deadLine = localDate.format(dtf);
+                task.setDeadLineTask(deadLine);
+                dedline = false;
+            } catch (DateTimeException e) {
+                System.out.println("Введена неверная дата");
+            }
+        }while (dedline);
 
         System.out.println("Введите Описание : ");
         String description = scanner.nextLine();
@@ -37,21 +60,26 @@ public class TaskHandlerImpl implements TaskHandler{
         String nameOfTask = scanner.nextLine();
         task.setNameTask(nameOfTask);
 
-        System.out.println("Введите номер id задачи : ");
-        int idTask = Integer.parseInt(scanner.nextLine());
-        task.setIdTask(idTask);
-        if (taskList.add(task))
-            return true;
-        return false;
+        task.setIdTask(countTask);
+
+        taskList.add(task);
+        System.out.println("Задача добавлена!");
+        countTask++;
     }
 
     @Override
-    public boolean deleteTaskByNum() {
-        System.out.println("Введите номер задачи: ");
-        int uI = Integer.parseInt(scanner.nextLine());
-        if (taskList.remove(taskList.get(uI)))
-            return true;
-        return false;
+    public void deleteTaskByNum() {
+        boolean delete = true;
+        do {
+            try {
+                System.out.println("Введите номер задачи: ");
+                int uI = Integer.parseInt(scanner.nextLine());
+                taskList.remove(taskList.get(uI - 1));
+                delete = false;
+            }catch (NumberFormatException e){
+                System.out.println("Введите число");
+            }
+        }while (delete);
     }
 
     @Override
@@ -61,9 +89,17 @@ public class TaskHandlerImpl implements TaskHandler{
 
     @Override
     public void markAsComplete() {
-        System.out.println("Введите номер задачи: ");
-        int uI = Integer.parseInt(scanner.nextLine());
-        taskList.get(uI).setStatusTask(Status.COMPLETED);
+        boolean mark = true;
+        do {
+            try {
+                System.out.println("Введите номер задачи: ");
+                int uI = Integer.parseInt(scanner.nextLine());
+                taskList.get(uI - 1).setStatusTask(Status.COMPLETED);
+                mark = false;
+            } catch (NumberFormatException e) {
+                System.out.println("Введите число");
+            }
+        }while (mark);
     }
 
     @Override
@@ -76,8 +112,12 @@ public class TaskHandlerImpl implements TaskHandler{
         return findedTask;
     }
 
-    @Override
-    public String toString() {
-        return "taskList = " + taskList;
+    public String getAllTasks(){
+        if (countTask > 1){
+            for (Task task1 : taskList) {
+                System.out.println((taskList.indexOf(task1) + 1) + "." + task1);
+            }
+        }
+        return "Список задач пуст!";
     }
 }

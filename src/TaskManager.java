@@ -5,7 +5,7 @@ public class TaskManager {
 
     private static Scanner scanner = new Scanner(System.in);
     private TaskHandlerImpl taskHandlerImpl = new TaskHandlerImpl();
-    TaskPrinter taskPrinter = new TaskPrinter(taskHandlerImpl);
+    private TaskPrinter taskPrinter = new TaskPrinter(taskHandlerImpl);
 
     public void start(){
         int userInpMenu = -1;
@@ -26,10 +26,7 @@ public class TaskManager {
             }
             if (userInpMenu != 0) {
                 switch (userInpMenu) {
-                    case 1 -> {
-                        taskHandlerImpl.addTask();
-//                        countTasks++;
-                    }
+                    case 1 -> taskHandlerImpl.addTask();
                     case 2 -> taskPrinter.showTasks();
                     case 3 -> taskHandlerImpl.deleteTaskByNum();
                     case 4 -> taskHandlerImpl.markAsComplete();

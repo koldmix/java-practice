@@ -8,16 +8,6 @@ public class Task {
     private int idTask;
     private Status statusTask = Status.NOT_COMPLETED;
 
-//    public Task(Priority priorityTask, String deadLineTask, String descriptionTask, String nameTask, int idTask) {
-//        this.priorityTask = priorityTask;
-//        this.deadLineTask = deadLineTask;
-//        this.descriptionTask = descriptionTask;
-//        this.nameTask = nameTask;
-//        this.idTask = idTask;
-//        this.statusTask = Status.NOT_COMPLETED;
-//    }
-
-
     public void setPriorityTask(Priority priorityTask) {
         this.priorityTask = priorityTask;
     }
@@ -79,13 +69,18 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "priorityTask=" + priorityTask +
-                ", deadLineTask='" + deadLineTask + '\'' +
-                ", descriptionTask='" + descriptionTask + '\'' +
-                ", nameTask='" + nameTask + '\'' +
-                ", idTask=" + idTask +
-                ", statusTask=" + statusTask +
-                '}';
+            if (statusTask == Status.NOT_COMPLETED){
+                return  " [ ] Приоритет: " + priorityTask +
+                        ", Дедлайн: '" + deadLineTask + '\'' +
+                        ", Описание: '" +descriptionTask + '\'' +
+                        ", Название: '" + nameTask + '\'' +
+                        ", id: " + idTask;
+            }
+        return  " [X] Приоритет: " + priorityTask +
+                ", Дедлайн: '" + deadLineTask + '\'' +
+                ", Описание: '" +descriptionTask + '\'' +
+                ", Название: '" + nameTask + '\'' +
+                ", id: " + idTask;
+
     }
 }

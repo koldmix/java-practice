@@ -1,9 +1,10 @@
 
 public interface TaskHandler {
 
-     boolean addTask();
-     boolean deleteTaskByNum();
+     void addTask();
+     void deleteTaskByNum();
      void deleteAllTask();
      void markAsComplete();
      Task getAllTasksByName(String nameForFind);
+
 }
