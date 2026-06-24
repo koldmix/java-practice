@@ -1,86 +1,80 @@
 import java.util.Objects;
 
-public class Task {
-    private Priority priorityTask;
-    private String deadLineTask;
-    private String descriptionTask;
-    private String nameTask;
-    private int idTask;
-    private Status statusTask = Status.NOT_COMPLETED;
+public class  Task{
+    private Priority priority;
+    private String deadLine;
+    private String description;
+    private String name;
+    private int id;
+    private Status status = Status.NOT_COMPLETED;
 
-    public void setPriorityTask(Priority priorityTask) {
-        this.priorityTask = priorityTask;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
-    public void setDeadLineTask(String deadLineTask) {
-        this.deadLineTask = deadLineTask;
+    public void setDeadLine(String deadLine) {
+        this.deadLine = deadLine;
     }
 
-    public void setDescriptionTask(String descriptionTask) {
-        this.descriptionTask = descriptionTask;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setNameTask(String nameTask) {
-        this.nameTask = nameTask;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setIdTask(int idTask) {
-        this.idTask = idTask;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setStatusTask(Status statusTask) {
-        this.statusTask = Status.COMPLETED;
+    public void setStatus(Status status) {
+        this.status = Status.COMPLETED;
     }
 
-    public Priority getPriorityTask() {
-        return priorityTask;
+    public Priority getPriority() {
+        return priority;
     }
 
-    public String getDeadLineTask() {
-        return deadLineTask;
+    public String getDeadLine() {
+        return deadLine;
     }
 
-    public String getDescriptionTask() {
-        return descriptionTask;
+    public String getDescription() {
+        return description;
     }
 
-    public String getNameTask() {
-        return nameTask;
+    public String getName() {
+        return name;
     }
 
-    public int getIdTask() {
-        return idTask;
+    public int getId() {
+        return id;
     }
 
-    public Status getStatusTask() {
-        return statusTask;
+    public Status getStatus() {
+        return status;
     }
 
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Task task)) return false;
-        return idTask == task.idTask && priorityTask == task.priorityTask && Objects.equals(deadLineTask, task.deadLineTask) && Objects.equals(descriptionTask, task.descriptionTask) && Objects.equals(nameTask, task.nameTask) && statusTask == task.statusTask;
+        return id == task.id && priority == task.priority && Objects.equals(deadLine, task.deadLine) && Objects.equals(description, task.description) && Objects.equals(name, task.name) && status == task.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(priorityTask, deadLineTask, descriptionTask, nameTask, idTask, statusTask);
+        return Objects.hash(priority, deadLine, description, name, id, status);
     }
 
     @Override
     public String toString() {
-            if (statusTask == Status.NOT_COMPLETED){
-                return  " [ ] Приоритет: " + priorityTask +
-                        ", Дедлайн: '" + deadLineTask + '\'' +
-                        ", Описание: '" +descriptionTask + '\'' +
-                        ", Название: '" + nameTask + '\'' +
-                        ", id: " + idTask;
-            }
-        return  " [X] Приоритет: " + priorityTask +
-                ", Дедлайн: '" + deadLineTask + '\'' +
-                ", Описание: '" +descriptionTask + '\'' +
-                ", Название: '" + nameTask + '\'' +
-                ", id: " + idTask;
+        String statusTask = status == Status.NOT_COMPLETED ? "[ ]" : "[X]";
+                return  statusTask + " Приоритет: " + priority +
+                        ", Дедлайн: '" + deadLine + '\'' +
+                        ", Описание: '" +description + '\'' +
+                        ", Название: '" + name + '\'' +
+                        ", id: " + id;
 
     }
 }

@@ -14,6 +14,7 @@ public class TaskManager {
             TaskPrinter.showMenu();
             String input = scanner.nextLine();
 
+
             try {
                 userInpMenu = Integer.parseInt(input);
             } catch (NumberFormatException e) {

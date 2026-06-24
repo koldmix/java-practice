@@ -12,8 +12,15 @@ public final class TaskPrinter {
     }
 
     public void showTasks(){
-        System.out.println(taskHandlerImpl.getAllTasks());
+//        System.out.println(taskHandlerImpl.getAllTasks());
+        taskHandlerImpl.getAllTasks();
     }
+
+    public static final String PRIORITY_MENU_TEXT = """
+            Введите приоритет:\s
+            1 - IMPORTANT,
+            2 - NOT_IMPORTANT,
+            3 - STANDARD.""";
 
     public static void showMenu(){
         System.out.println("""

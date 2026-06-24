@@ -5,6 +5,6 @@ public interface TaskHandler {
      void deleteTaskByNum();
      void deleteAllTask();
      void markAsComplete();
-     Task getAllTasksByName(String nameForFind);
+     void getAllTasksByName(String nameForFind);
 
 }
