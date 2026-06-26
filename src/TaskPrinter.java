@@ -11,8 +11,7 @@ public final class TaskPrinter {
         throw new UnsupportedOperationException();
     }
 
-    public void showTasks(){
-//        System.out.println(taskHandlerImpl.getAllTasks());
+    public void showTasks() {
         taskHandlerImpl.getAllTasks();
     }
 
@@ -22,7 +21,7 @@ public final class TaskPrinter {
             2 - NOT_IMPORTANT,
             3 - STANDARD.""";
 
-    public static void showMenu(){
+    public static void showMenu() {
         System.out.println("""
                 >>> Меню:\s
                 1. Добавить задачу

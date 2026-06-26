@@ -7,7 +7,7 @@ public class TaskManager {
     private TaskHandlerImpl taskHandlerImpl = new TaskHandlerImpl();
     private TaskPrinter taskPrinter = new TaskPrinter(taskHandlerImpl);
 
-    public void start(){
+    public void start() {
         int userInpMenu = -1;
 
         do {

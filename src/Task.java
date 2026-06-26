@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class  Task{
+public class Task {
     private Priority priority;
     private String deadLine;
     private String description;
@@ -70,11 +70,11 @@ public class  Task{
     @Override
     public String toString() {
         String statusTask = status == Status.NOT_COMPLETED ? "[ ]" : "[X]";
-                return  statusTask + " Приоритет: " + priority +
-                        ", Дедлайн: '" + deadLine + '\'' +
-                        ", Описание: '" +description + '\'' +
-                        ", Название: '" + name + '\'' +
-                        ", id: " + id;
+        return statusTask + " Приоритет: " + priority +
+                ", Дедлайн: '" + deadLine + '\'' +
+                ", Описание: '" + description + '\'' +
+                ", Название: '" + name + '\'' +
+                ", id: " + id;
 
     }
 }

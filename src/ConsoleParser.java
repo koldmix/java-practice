@@ -4,13 +4,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-public class ConsoleParser {
-    private  Scanner scanner = new Scanner(System.in);
+public final class ConsoleParser {
+    private static Scanner scanner = new Scanner(System.in);
 
+    private ConsoleParser() {
+    }
 
-    public void readPriorityFromConcole(String priorityMenu, Consumer<Priority> userPriority){
+    public static void readPriorityFromConcole(String priorityMenu, Consumer<Priority> userPriority) {
         int numberOfPriority = 0;
-        while (numberOfPriority < 1 || numberOfPriority > 3){
+        while (numberOfPriority < 1 || numberOfPriority > 3) {
             System.out.println(priorityMenu);
             try {
                 numberOfPriority = Integer.parseInt(scanner.nextLine());
@@ -21,9 +23,9 @@ public class ConsoleParser {
         }
     }
 
-    public void readDateFromConcole(DateTimeFormatter dtf, Consumer<String> setDeadLine){
+    public static void readDateFromConcole(DateTimeFormatter dtf, Consumer<String> setDeadLine) {
         boolean correctDate = false;
-        while (!correctDate){
+        while (!correctDate) {
             System.out.println("Введите дедлайн в формате dd.MM.yy: ");
             String date = scanner.nextLine();
             try {
@@ -31,19 +33,25 @@ public class ConsoleParser {
                 String deadLine = localDate.format(dtf);
                 setDeadLine.accept(deadLine);
                 correctDate = true;
-            }catch (DateTimeException e){
+            } catch (DateTimeException e) {
                 System.out.println("Неверный формат даты");
             }
         }
     }
 
-    public int readDeleteNumFromConsole(){
-        System.out.println("Введите номер задачи: ");
-        return Integer.parseInt(scanner.nextLine());
+    public static int readDeleteNumFromConsole() {
+        while (true) {
+            System.out.println("Введите номер задачи: ");
+            try {
+                return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Неверный ввод. Введите число");
+            }
+        }
     }
 
 
-    public void readFromConsole(String field, Consumer<String> setter){
+    public static void readFromConsole(String field, Consumer<String> setter) {
         System.out.println("Введите " + field);
         setter.accept(scanner.nextLine());
     }

@@ -13,11 +13,11 @@ public enum Priority {
         return priority;
     }
 
-    public static Priority fromInt(int value){
+    public static Priority fromInt(int value) {
         Priority priority1 = null;
 
         for (Priority priority : Priority.values()) {
-            if (priority.getPriority() == value){
+            if (priority.getPriority() == value) {
                 priority1 = priority;
             }
         }

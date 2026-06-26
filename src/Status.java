@@ -12,10 +12,10 @@ public enum Status {
         return index;
     }
 
-    public static Status getFromInt(int index){
+    public static Status getFromInt(int index) {
         Status status = null;
         for (Status status1 : Status.values()) {
-            if (status1.getIndex() == index){
+            if (status1.getIndex() == index) {
                 status = status1;
             }
         }

@@ -6,22 +6,21 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class TaskHandlerImpl implements TaskHandler{
+public class TaskHandlerImpl implements TaskHandler {
 
     private List<Task> taskList = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yy");
-    ConsoleParser consoleParser = new ConsoleParser();
     private int countTask = 1;
 
     @Override
     public void addTask() {
         Task task = new Task();
 
-        consoleParser.readPriorityFromConcole(TaskPrinter.PRIORITY_MENU_TEXT, task::setPriority);
-        consoleParser.readDateFromConcole(dtf, task::setDeadLine);
-        consoleParser.readFromConsole("описание задачи: ", task::setDescription);
-        consoleParser.readFromConsole("название задачи: ", task::setName);
+        ConsoleParser.readPriorityFromConcole(TaskPrinter.PRIORITY_MENU_TEXT, task::setPriority);
+        ConsoleParser.readDateFromConcole(dtf, task::setDeadLine);
+        ConsoleParser.readFromConsole("описание задачи: ", task::setDescription);
+        ConsoleParser.readFromConsole("название задачи: ", task::setName);
 
         task.setId(countTask);
 
@@ -32,17 +31,13 @@ public class TaskHandlerImpl implements TaskHandler{
 
     @Override
     public void deleteTaskByNum() {
-
-        boolean successDelete = true;
-        do {
-            try {
-                taskList.remove(consoleParser.readDeleteNumFromConsole() - 1);
-                successDelete = false;
-                countTask--;
-            }catch (NumberFormatException e){
-                System.out.println("Введите число");
-            }
-        }while (successDelete);
+        try {
+            taskList.remove(ConsoleParser.readDeleteNumFromConsole() - 1);
+            countTask--;
+            System.out.println("Задача успешно удалена!");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Ошибка: Задачи с таким номером не существует!");
+        }
     }
 
     @Override
@@ -62,7 +57,7 @@ public class TaskHandlerImpl implements TaskHandler{
             } catch (NumberFormatException e) {
                 System.out.println("Введите число");
             }
-        }while (mark);
+        } while (mark);
     }
 
     @Override
@@ -72,12 +67,12 @@ public class TaskHandlerImpl implements TaskHandler{
                 .forEach(System.out::println);
     }
 
-    public void getAllTasks(){
-        if (countTask > 1){
+    public void getAllTasks() {
+        if (countTask > 1) {
             taskList.stream()
                     .map(task -> taskList.indexOf(task) + 1 + "." + task)
                     .forEach(System.out::println);
-        }else
+        } else
             System.out.println("Список задач пуст!");
     }
 }
