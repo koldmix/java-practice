@@ -9,6 +9,5 @@ public interface TaskHandler {
 
     void markAsComplete();
 
-    void getAllTasksByName(String nameForFind);
-
+    void getAllTasks();
 }

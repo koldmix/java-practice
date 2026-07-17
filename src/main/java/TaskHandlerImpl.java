@@ -45,11 +45,12 @@ public class TaskHandlerImpl implements TaskHandler {
     @Override
     public void markAsComplete() {
         boolean mark = true;
+        int numOfMarkedTask = -1;
         do {
             try {
                 System.out.println("Введите номер задачи: ");
-                int uI = Integer.parseInt(scanner.nextLine());
-                taskList.get(uI - 1).setStatus(Status.COMPLETED);
+                 numOfMarkedTask = Integer.parseInt(scanner.nextLine());
+                taskList.get(numOfMarkedTask - 1).setStatus(Status.COMPLETED);
                 mark = false;
             } catch (NumberFormatException e) {
                 System.out.println("Введите число");
@@ -57,13 +58,17 @@ public class TaskHandlerImpl implements TaskHandler {
         } while (mark);
     }
 
-    @Override
+    public Task returnAddedTask() {
+        return taskList.getLast();
+    }
+
     public void getAllTasksByName(String nameForFind) {
         taskList.stream()
                 .filter(t -> t.getName().equals(nameForFind))
                 .forEach(System.out::println);
     }
 
+    @Override
     public void getAllTasks() {
         if (countTask > 1) {
             taskList.stream()

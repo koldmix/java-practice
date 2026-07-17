@@ -2,9 +2,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class UserService {
-    public int saveUser (String name){
+    public String saveUser (){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите имя пользователя: ");
+        String userName = sc.nextLine();
         String insertSql = "INSERT INTO users (name) VALUES (?)";
         String selectSql = "SELECT id FROM users WHERE name = ?";
 
@@ -12,17 +16,17 @@ public class UserService {
              PreparedStatement insertPs = connect.prepareStatement(insertSql);
              PreparedStatement selectPs = connect.prepareStatement(selectSql)) {
 
-            insertPs.setString(1, name);
+            insertPs.setString(1, userName);
             insertPs.executeUpdate();
 
-            selectPs.setString(1, name);
+            selectPs.setString(1, userName);
             ResultSet rs = selectPs.executeQuery();
             if (rs.next())
-                return rs.getInt("id");
+                return String.valueOf(rs.getInt("id"));
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return -1;
+        return userName;
     }
 }
