@@ -2,6 +2,22 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+# Настройки IntelliJ IDEA
+.idea/
+*.iml
+
+# Результаты сборки Maven
+target/
+*.class
+*.jar
+*.war
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Логи
+*.log
 
 ### Eclipse ###
 .apt_generated
