@@ -1,10 +1,10 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE tasks (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     deadline TIMESTAMP,

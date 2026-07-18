@@ -5,12 +5,13 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class UserService {
-    public String saveUser (){
-        Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
+
+    public String saveUser() {
         System.out.println("Введите имя пользователя: ");
         String userName = sc.nextLine();
-        String insertSql = "INSERT INTO users (name) VALUES (?)";
-        String selectSql = "SELECT id FROM users WHERE name = ?";
+        final String insertSql = "INSERT INTO users (name) VALUES (?)";
+        final String selectSql = "SELECT id FROM users WHERE name = ?";
 
         try (Connection connect = DatabaseManager.getConnection();
              PreparedStatement insertPs = connect.prepareStatement(insertSql);
