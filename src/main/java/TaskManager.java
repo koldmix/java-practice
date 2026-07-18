@@ -7,7 +7,6 @@ public class TaskManager {
     private final UserService userService = new UserService();
     private final DatabaseTaskHandler databaseTaskHandler = new DatabaseTaskHandler(Integer.parseInt(userService.saveUser()));
     private final TaskPrinter taskPrinter = new TaskPrinter(taskHandlerImpl, databaseTaskHandler);
-    String choice = scanner.nextLine();
     int userInpMenu = -1;
 
     public void saveInMemory() {
@@ -70,6 +69,7 @@ public class TaskManager {
                 1 - В память.
                 2 - В базу данных.
                 """);
+        String choice = scanner.nextLine();
 
         if ("1".equals(choice)) {
             saveInMemory();
