@@ -2,13 +2,20 @@
 public final class TaskPrinter {
 
     private TaskHandlerImpl taskHandlerImpl;
+    private DatabaseTaskHandler databaseTaskHandler;
 
-    public TaskPrinter(TaskHandlerImpl taskHandlerImpl) {
+    public TaskPrinter(TaskHandlerImpl taskHandlerImpl, DatabaseTaskHandler databaseTaskHandler) {
         this.taskHandlerImpl = taskHandlerImpl;
+        this.databaseTaskHandler = databaseTaskHandler;
     }
 
-    private TaskPrinter() {
+    private TaskPrinter(DatabaseTaskHandler databaseTaskHandler) {
+
         throw new UnsupportedOperationException();
+    }
+
+    public void showTaskByDB() {
+        databaseTaskHandler.getAllTasks();
     }
 
     public void showTasks() {
